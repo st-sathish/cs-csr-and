@@ -10,4 +10,9 @@
     <string name="err_msg_name">Enter your full name</string>
     <string name="err_msg_email">Enter valid email address</string>
     <string name="err_msg_password">Enter the password</string>
+
+    <string name="action_categories">Categories</string>
+    <string name="action_items">Items</string>
+    <string name="action_exp_items">Expiry Items</string>
+    <string name="action_alert">Alert</string>
 </resources>
