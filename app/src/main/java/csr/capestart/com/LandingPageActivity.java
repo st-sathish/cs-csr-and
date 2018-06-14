@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
+import csr.capestart.com.fragments.CategoryFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
 import csr.capestart.com.fragments.HomeFragment;
 
@@ -13,6 +14,7 @@ public class LandingPageActivity extends BaseAppCompatActivity {
 
     public static final int FRAGMENT_DEFAULT = 1;
     public static final int FRAGMENT_HOME = 2;
+    public static final int FRAGMENT_CATEGORY = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,10 @@ public class LandingPageActivity extends BaseAppCompatActivity {
             case FRAGMENT_HOME:
                 title = "Home";
                 fragment = HomeFragment.newInstance(title);
+                break;
+            case FRAGMENT_CATEGORY:
+                title = "List Categories";
+                fragment = CategoryFragment.newInstance(title);
                 break;
             case FRAGMENT_DEFAULT:
             default:

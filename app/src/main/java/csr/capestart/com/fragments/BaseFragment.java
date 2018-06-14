@@ -27,12 +27,13 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        if(null != getArguments())
+        if(null != getArguments()) {
             mTitle = getArguments().getString(AppConstants.INTENT_PARAM_ONE);
+        }
+        super.onCreate(savedInstanceState);
     }
 
     @Override
-    @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();

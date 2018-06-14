@@ -15,6 +15,8 @@ import java.util.Map;
 
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.extras.AppLog;
+import csr.capestart.com.extras.SessionStore;
+import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -76,6 +78,7 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
                     @Override
                     public void onNext(JSONObject user) {
                         AppLog.message(TAG, user.toString());
+                        SessionStore.user = Parser.parseUser(user);
                         openLandingPageActivity();
                     }
 

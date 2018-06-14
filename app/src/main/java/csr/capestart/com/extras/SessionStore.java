@@ -1,4 +1,8 @@
 package csr.capestart.com.extras;
 
-public class SessionStore {
+import csr.capestart.com.data.models.User;
+
+public final class SessionStore {
+
+    public static User user = null;
 }

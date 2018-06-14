@@ -17,8 +17,8 @@
     </item>
 
     <item
-        android:id="@+id/action_exp_items"
-        android:title="@string/action_exp_items"
+        android:id="@+id/action_expired_items"
+        android:title="@string/action_expired_items"
         app:showAsAction="ifRoom"
         android:enabled="true">
     </item>

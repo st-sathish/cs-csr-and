@@ -8,6 +8,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+import csr.capestart.com.extras.SessionStore;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     View mSplashTextHolder;
@@ -20,8 +22,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     void launchNextActivity() {
-        Intent i = new Intent(SplashScreenActivity.this, LoginActivity.class);
-        startActivity(i);
+        Intent intent;
+        if (SessionStore.user != null) {
+            intent = new Intent(SplashScreenActivity.this, LandingPageActivity.class);
+        } else {
+            intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+        }
+        startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
     }
