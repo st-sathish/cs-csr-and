@@ -77,14 +77,14 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
 
                     @Override
                     public void onNext(JSONObject user) {
-                        AppLog.message(TAG, user.toString());
+                        AppLog.log(TAG, user.toString());
                         SessionStore.user = Parser.parseUser(user);
                         openLandingPageActivity();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        AppLog.message(TAG, e.getMessage());
+                        AppLog.log(TAG, e.getMessage());
                     }
 
                     @Override

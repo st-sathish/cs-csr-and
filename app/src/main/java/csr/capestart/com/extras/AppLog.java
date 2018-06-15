@@ -25,7 +25,7 @@ public final class AppLog {
             Log.e(tag, message);
     }
 
-    public static void message(String tag, String message) {
+    public static void log(String tag, String message) {
         if(isInfoMessage)
             Log.e(tag, message);
     }

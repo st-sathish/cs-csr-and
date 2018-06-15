@@ -16,4 +16,7 @@
     <string name="action_expired_items">Expired Items</string>
     <string name="action_alert">Alert</string>
     <string name="hello_world_txt">Hello World</string>
+
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
 </resources>
