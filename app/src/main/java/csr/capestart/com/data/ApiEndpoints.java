@@ -8,4 +8,6 @@ public class ApiEndpoints {
 
     public static final String POST_SIGNIN_API = API_BASE_PATH + "/signin.php";
 
+    public static final String GET_CATEGORIES_API = API_BASE_PATH + "/category/get_categories.php";
+
 }

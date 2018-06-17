@@ -79,6 +79,6 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
-
+        displayView(FRAGMENT_CATEGORY, "Category", false);
     }
 }

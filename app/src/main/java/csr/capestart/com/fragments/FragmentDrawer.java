@@ -198,7 +198,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
     }
 
     public interface FragmentDrawerListener {
-        public void onDrawerItemSelected(View view, int position);
+        void onDrawerItemSelected(View view, int position);
     }
 
     @Override
@@ -208,15 +208,5 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
 
     public void toggleDrawer() {
         mDrawerLayout.openDrawer(containerView);
-    }
-
-    private void switchFragment(int aViewNumber) {
-        if (getActivity() == null)
-            return;
-
-        if (getActivity() instanceof LandingPageActivity) {
-            LandingPageActivity fa = (LandingPageActivity) getActivity();
-            fa.displayView(aViewNumber, null, false);
-        }
     }
 }
