@@ -22,11 +22,11 @@ public final class AppLog {
 
     public static void debug(String tag, String message) {
         if(isDebug)
-            Log.e(tag, message);
+            Log.d(tag, message);
     }
 
     public static void log(String tag, String message) {
         if(isInfoMessage)
-            Log.e(tag, message);
+            Log.i(tag, message);
     }
 }
