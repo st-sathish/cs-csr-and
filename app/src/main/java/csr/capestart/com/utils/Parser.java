@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import csr.capestart.com.data.models.Category;
+import csr.capestart.com.data.models.CookieItem;
+import csr.capestart.com.data.models.ExpiredItem;
 import csr.capestart.com.data.models.User;
 import csr.capestart.com.extras.AppLog;
 
@@ -52,4 +54,42 @@ public final class Parser {
         }
     }
 
+    public static List<CookieItem> parseCookieItem(JSONArray items) {
+        List<CookieItem> cookieItems = new ArrayList<CookieItem>();
+        try {
+            for(int i =0;i < items.length();i++) {
+                JSONObject c = items.getJSONObject(i);
+                CookieItem cookieItem = new CookieItem();
+                cookieItem.setItemName(c.getString("item_name"));
+                cookieItem.setBarcode(c.getString("barcode"));
+                cookieItem.setExpiredDate(c.getString("expiry_date"));
+                cookieItem.setItemId(c.getString("i_id"));
+                cookieItem.setPrice(c.getString("price"));
+                cookieItem.setCategory("category");
+                cookieItems.add(cookieItem);
+            }
+        } catch (JSONException e) {
+            AppLog.error(TAG, e.getMessage());
+        }
+        return cookieItems;
+    }
+
+    public static List<ExpiredItem> parseExpiredItem(JSONArray items) {
+        List<ExpiredItem> expiredItems = new ArrayList<ExpiredItem>();
+        try {
+            for(int i =0;i < items.length();i++) {
+                JSONObject c = items.getJSONObject(i);
+                ExpiredItem expiredItem = new ExpiredItem();
+                expiredItem.setItemName(c.getString("item_name"));
+                expiredItem.setBarcode(c.getString("barcode"));
+                expiredItem.setItemId(c.getString("i_id"));
+                expiredItem.setPrice(c.getString("price"));
+                expiredItem.setCategory("category");
+                expiredItems.add(expiredItem);
+            }
+        } catch (JSONException e) {
+            AppLog.error(TAG, e.getMessage());
+        }
+        return expiredItems;
+    }
 }

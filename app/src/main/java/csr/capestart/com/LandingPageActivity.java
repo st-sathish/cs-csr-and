@@ -10,6 +10,8 @@ import android.view.View;
 
 import csr.capestart.com.fragments.CategoryFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
+import csr.capestart.com.fragments.CookieItemFragment;
+import csr.capestart.com.fragments.ExpiredItemFragment;
 import csr.capestart.com.fragments.FragmentDrawer;
 import csr.capestart.com.fragments.HomeFragment;
 
@@ -18,6 +20,8 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     public static final int FRAGMENT_DEFAULT = 1;
     public static final int FRAGMENT_HOME = 2;
     public static final int FRAGMENT_CATEGORY = 3;
+    public static final int FRAGMENT_COOKIE_ITEM = 4;
+    public static final int FRAGMENT_EXPIRED_ITEM = 5;
 
     private FragmentDrawer drawerFragment;
 
@@ -55,6 +59,14 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 title = "List Categories";
                 fragment = CategoryFragment.newInstance(title);
                 break;
+            case FRAGMENT_COOKIE_ITEM:
+                title = "Cookie Items";
+                fragment = CookieItemFragment.newInstance(title);
+                break;
+            case FRAGMENT_EXPIRED_ITEM:
+                title = "Expired Items";
+                fragment = ExpiredItemFragment.newInstance(title);
+                break;
             case FRAGMENT_DEFAULT:
             default:
                 title = "Coming Soon";
@@ -79,6 +91,19 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
-        displayView(FRAGMENT_CATEGORY, "Category", false);
+        switch(position) {
+            case 1:
+                displayView(FRAGMENT_CATEGORY, "Category", true);
+                break;
+            case 2:
+                displayView(FRAGMENT_COOKIE_ITEM, "Cookie Items", true);
+                break;
+            case 3:
+                displayView(FRAGMENT_EXPIRED_ITEM, "Expired item", true);
+                break;
+            default:
+                displayView(FRAGMENT_HOME, "Home", true);
+                break;
+        }
     }
 }

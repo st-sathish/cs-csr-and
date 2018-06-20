@@ -19,4 +19,11 @@
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+
+    <!-- Items label -->
+    <string name="lbl_item_name">Item Name</string>
+    <string name="lbl_barcode">Bar Code</string>
+    <string name="lbl_price">Price</string>
+    <string name="lbl_expired_date">Expired Date</string>
+    <string name="lbl_category">Category</string>
 </resources>
