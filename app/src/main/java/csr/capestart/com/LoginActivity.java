@@ -1,5 +1,6 @@
 package csr.capestart.com;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -57,7 +58,14 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
         startActivity(intent);
     }
 
+
     public void doLogin() {
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating");
+        progressDialog.show();
+
         Map<String, String> body = new HashMap<>();
         body.put("email", uEditText.getText().toString());
         body.put("password", pEditText.getText().toString());
@@ -79,12 +87,14 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
                     public void onNext(JSONObject user) {
                         AppLog.log(TAG, user.toString());
                         SessionStore.user = Parser.parseUser(user);
+                        progressDialog.dismiss();
                         openLandingPageActivity();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         AppLog.log(TAG, e.getMessage());
+                        progressDialog.dismiss();
                     }
 
                     @Override
