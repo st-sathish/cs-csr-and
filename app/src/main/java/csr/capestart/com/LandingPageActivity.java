@@ -101,6 +101,15 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
             case 3:
                 displayView(FRAGMENT_EXPIRED_ITEM, "Expired item", true);
                 break;
+            case 4:
+                displayView(FRAGMENT_DEFAULT, "Notifications", true);
+                break;
+            case 5:
+                displayView(FRAGMENT_DEFAULT, "Settings", true);
+                break;
+            case 6:
+                displayView(FRAGMENT_DEFAULT, "Logout", true);
+                break;
             default:
                 displayView(FRAGMENT_HOME, "Home", true);
                 break;
