@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1064797218329",
+    "firebase_url": "https://cs-csr.firebaseio.com",
+    "project_id": "cs-csr",
+    "storage_bucket": "cs-csr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064797218329:android:193ec9d0f7e8fdfc",
+        "android_client_info": {
+          "package_name": "csr.capestart.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064797218329-tvpiq89i423ion7ssjc4u52b38rbgelu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9RxuWBnLZ4hn3iCxf0X74V275FrU3HEw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
