@@ -10,6 +10,16 @@ public class User {
 
     private String mobile;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
+
     public String getuId() {
         return uId;
     }

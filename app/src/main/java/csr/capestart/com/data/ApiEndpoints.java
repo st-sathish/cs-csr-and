@@ -1,6 +1,10 @@
 package csr.capestart.com.data;
 
-public class ApiEndpoints {
+public final class ApiEndpoints {
+
+    private ApiEndpoints() {
+
+    }
 
     private static final String DEV_HOST_URL = "http://10.0.2.2/csr";
 
@@ -13,4 +17,6 @@ public class ApiEndpoints {
     public static final String GET_COOKIE_ITEMS_API = API_BASE_PATH + "/items/get_items.php";
 
     public static final String GET_EXPIRED_ITEMS_API = API_BASE_PATH + "/items/get_expired_items.php";
+
+    public static final String POST_REGISTER_DEVICE_TOKEN_API = API_BASE_PATH + "/user/put_device_token.php";
 }

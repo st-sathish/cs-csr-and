@@ -8,6 +8,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.fragments.CategoryFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
 import csr.capestart.com.fragments.CookieItemFragment;
@@ -17,6 +20,7 @@ import csr.capestart.com.fragments.HomeFragment;
 
 public class LandingPageActivity extends BaseAppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
+    private static final String TAG = "LandingPageActivity";
     public static final int FRAGMENT_DEFAULT = 1;
     public static final int FRAGMENT_HOME = 2;
     public static final int FRAGMENT_CATEGORY = 3;
@@ -38,6 +42,8 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
 
         //load default
         displayView(FRAGMENT_HOME, "", false);
+        String token = FirebaseInstanceId.getInstance().getToken();
+        AppLog.log(TAG, token);
     }
 
     public void setActionBarTitle(String title) {
