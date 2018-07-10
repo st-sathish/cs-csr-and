@@ -14,6 +14,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         MyNotificationManager myNotificationManager = new MyNotificationManager(getApplicationContext());
         //creating an intent for the notification
         Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
-        myNotificationManager.showNotification("Hello", remoteMessage.getData().get("message"), intent);
+        myNotificationManager.showNotification("Alert", remoteMessage.getData().get("message"), intent);
     }
 }
