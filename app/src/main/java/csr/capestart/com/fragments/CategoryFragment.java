@@ -24,6 +24,7 @@ import csr.capestart.com.R;
 import csr.capestart.com.adapters.CategoryAdapter;
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.models.Category;
+import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
 import csr.capestart.com.utils.Parser;
@@ -49,6 +50,7 @@ public class CategoryFragment extends BaseFragment {
     public static CategoryFragment newInstance(String title) {
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle bundle = new Bundle();
+        bundle.putCharSequence(AppConstants.INTENT_PARAM_ONE, title);
         return categoryFragment;
     }
 

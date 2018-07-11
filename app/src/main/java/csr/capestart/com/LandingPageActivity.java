@@ -62,7 +62,7 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 fragment = HomeFragment.newInstance(title);
                 break;
             case FRAGMENT_CATEGORY:
-                title = "List Categories";
+                title = "Categories";
                 fragment = CategoryFragment.newInstance(title);
                 break;
             case FRAGMENT_COOKIE_ITEM:
