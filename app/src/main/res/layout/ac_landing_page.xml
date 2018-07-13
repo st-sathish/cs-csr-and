@@ -7,10 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LandingPageActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
     <!--<android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
@@ -48,13 +44,36 @@
         </android.support.design.widget.AppBarLayout>-->
 
         <!-- The main content view -->
+       <!-- <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
+
+    <!--</android.support.design.widget.CoordinatorLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/container_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+        </LinearLayout>
+
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-
-    <!--</android.support.design.widget.CoordinatorLayout>-->
+        <!-- The main content view -->
+    </LinearLayout>
 
     <fragment
         android:id="@+id/fragment_navigation_drawer"

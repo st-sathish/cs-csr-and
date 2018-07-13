@@ -2,6 +2,8 @@ package csr.capestart.com.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ import csr.capestart.com.R;
 import csr.capestart.com.adapters.NavItemDrawerAdapter;
 import csr.capestart.com.data.models.NavItem;
 import csr.capestart.com.extras.AppLog;
+import csr.capestart.com.extras.SessionStore;
 import csr.capestart.com.extras.SimpleDividerItemDecoration;
 
 public class FragmentDrawer extends Fragment implements View.OnClickListener {
@@ -33,6 +37,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private NavItemDrawerAdapter adapter;
+    private TextView tvName;
 
     List<NavItem> mNavItems = new ArrayList<NavItem>();
 
@@ -46,13 +51,13 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mNavItems.add(new NavItem("Home", R.drawable.home_outline));
-        mNavItems.add(new NavItem("Categories", R.drawable.shape));
-        mNavItems.add(new NavItem("Cookie Items", R.drawable.cookie));
-        mNavItems.add(new NavItem("Expired Items", R.drawable.settings_outline));
-        mNavItems.add(new NavItem("Notifications", R.drawable.bell_outline));
-        mNavItems.add(new NavItem("Settings", R.drawable.settings_outline));
-        mNavItems.add(new NavItem("Logout", R.drawable.logout));
+        mNavItems.add(new NavItem("Home", R.drawable.icons8_home));
+        mNavItems.add(new NavItem("Categories", R.drawable.icons8_categorize));
+        mNavItems.add(new NavItem("Cookie Items", R.drawable.icons8_cookies));
+        mNavItems.add(new NavItem("Expired Items", R.drawable.icons8_cookies));
+        mNavItems.add(new NavItem("Notifications", R.drawable.icons8_notification));
+        mNavItems.add(new NavItem("Settings", R.drawable.icons8_settings));
+        mNavItems.add(new NavItem("Logout", R.drawable.icons8_shutdown));
         super.onCreate(savedInstanceState);
     }
 
@@ -63,6 +68,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
         AppLog.log("Navigation", "onCreateView");
         View layout = inflater.inflate(R.layout.fr_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        tvName = layout.findViewById(R.id.tv_name);
         adapter = new NavItemDrawerAdapter(getActivity(), mNavItems);
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -81,6 +87,13 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
             }
         }));
         return layout;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        String name = SessionStore.user.getFirstName()+" "+SessionStore.user.getLastName();
+        tvName.setText(name);
     }
 
     @Override
