@@ -50,36 +50,6 @@ public final class Parser {
                     categoryList.add(category);
                 }
             }
-            for(int i =0;i < categories.length();i++) {
-                JSONObject c = categories.getJSONObject(i);
-                String categoryName = c.getString("name");
-                AppLog.log(TAG, categoryName);
-                if (!"".equals(categoryName)) {
-                    Category category = new Category();
-                    category.setCategoryName(categoryName);
-                    categoryList.add(category);
-                }
-            }
-            for(int i =0;i < categories.length();i++) {
-                JSONObject c = categories.getJSONObject(i);
-                String categoryName = c.getString("name");
-                AppLog.log(TAG, categoryName);
-                if (!"".equals(categoryName)) {
-                    Category category = new Category();
-                    category.setCategoryName(categoryName);
-                    categoryList.add(category);
-                }
-            }
-            for(int i =0;i < categories.length();i++) {
-                JSONObject c = categories.getJSONObject(i);
-                String categoryName = c.getString("name");
-                AppLog.log(TAG, categoryName);
-                if (!"".equals(categoryName)) {
-                    Category category = new Category();
-                    category.setCategoryName(categoryName);
-                    categoryList.add(category);
-                }
-            }
         } catch (JSONException e) {
             AppLog.error(TAG, e.getMessage());
         }

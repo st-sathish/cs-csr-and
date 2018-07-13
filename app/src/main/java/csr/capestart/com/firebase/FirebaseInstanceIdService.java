@@ -29,7 +29,7 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
     @Override
     public void onTokenRefresh() {
        String token = FirebaseInstanceId.getInstance().getToken();
-       registerToken(token);
+       // registerToken(token);
     }
 
     public void registerToken(String token) {

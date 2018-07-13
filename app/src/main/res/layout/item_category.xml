@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:weightSum="4"
         android:baselineAligned="false"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -19,11 +22,11 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/lbl_category"
-                android:src="@drawable/sample_cookie_pic"/>
+            <!--<com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/my_image_view"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                fresco:placeholderImage="@drawable/sample_cookie_pic" />-->
 
         </LinearLayout>
         <LinearLayout

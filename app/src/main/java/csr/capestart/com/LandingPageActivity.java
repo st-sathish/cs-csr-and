@@ -42,8 +42,6 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
 
         //load default
         displayView(FRAGMENT_HOME, "", false);
-        String token = FirebaseInstanceId.getInstance().getToken();
-        AppLog.log(TAG, token);
     }
 
     public void setActionBarTitle(String title) {
