@@ -35,9 +35,9 @@ public class BaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        //AppCompatActivity activity = (AppCompatActivity) getActivity();
-        //activity.setSupportActionBar(mToolbar);
+        Toolbar mToolbar = getActivity().findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(mToolbar);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -46,7 +46,7 @@ public class BaseFragment extends Fragment {
         super.onResume();
         if (!mIsVisible) {
             mIsVisible = true;
-           // ((Toolbar) getActivity().findViewById(R.id.toolbar)).setTitle(mTitle);
+           ((Toolbar) getActivity().findViewById(R.id.toolbar)).setTitle(mTitle);
         }
     }
 

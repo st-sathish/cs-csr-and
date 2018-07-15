@@ -9,24 +9,24 @@ import csr.capestart.com.R;
 
 import static csr.capestart.com.extras.AppConstants.INTENT_PARAM_ONE;
 
-public class HomeFragment extends BaseFragment {
+public class NotificationFragment extends BaseFragment {
 
-    public HomeFragment() {
+    public NotificationFragment() {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstance(String title) {
-        HomeFragment homeFragment = new HomeFragment();
+    public static NotificationFragment newInstance(String title) {
+        NotificationFragment fragment = new NotificationFragment();
         Bundle bundle = new Bundle();
         bundle.putCharSequence(INTENT_PARAM_ONE, title);
-        homeFragment.setArguments(bundle);
-        return homeFragment;
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mParentView = inflater.inflate(R.layout.fr_home, container, false);
+        mParentView = inflater.inflate(R.layout.fr_notification, container, false);
         return mParentView;
     }
 }

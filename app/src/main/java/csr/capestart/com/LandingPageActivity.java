@@ -1,22 +1,27 @@
 package csr.capestart.com;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import csr.capestart.com.extras.AppLog;
+import csr.capestart.com.extras.SessionStore;
 import csr.capestart.com.fragments.CategoryFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
 import csr.capestart.com.fragments.CookieItemFragment;
 import csr.capestart.com.fragments.ExpiredItemFragment;
 import csr.capestart.com.fragments.FragmentDrawer;
 import csr.capestart.com.fragments.HomeFragment;
+import csr.capestart.com.fragments.NotificationFragment;
 
 public class LandingPageActivity extends BaseAppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -26,6 +31,9 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     public static final int FRAGMENT_CATEGORY = 3;
     public static final int FRAGMENT_COOKIE_ITEM = 4;
     public static final int FRAGMENT_EXPIRED_ITEM = 5;
+    public static final int FRAGMENT_NOTIFICATION = 6;
+    public static final int FRAGMENT_SETTINGS = 7;
+    public static final int FRAGMENT_LOGOUT = 8;
 
     private FragmentDrawer drawerFragment;
 
@@ -33,8 +41,7 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_landing_page);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(mToolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
 
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -42,13 +49,6 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
 
         //load default
         displayView(FRAGMENT_HOME, "", false);
-    }
-
-    public void setActionBarTitle(String title) {
-        ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar) {
-            actionBar.setTitle(title);
-        }
     }
 
     public void displayView(int position, String aTitle, boolean addToBackstack) {
@@ -71,6 +71,13 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 title = "Expired Items";
                 fragment = ExpiredItemFragment.newInstance(title);
                 break;
+            case FRAGMENT_NOTIFICATION:
+                title = "Notifications";
+                fragment = NotificationFragment.newInstance(title);
+                break;
+            case FRAGMENT_LOGOUT:
+                doLogout();
+                break;
             case FRAGMENT_DEFAULT:
             default:
                 title = "Coming Soon";
@@ -82,15 +89,32 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
         }
     }
 
+    private void doLogout() {
+        new AlertDialog.Builder(this)
+                // Set Dialog Title
+                .setTitle("Alert")
+                // Set Dialog Message
+                .setMessage("Do you want to logout?")
+                // Positive button
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // reset
+                        SessionStore.user = null;
+                        Intent intent = new Intent(LandingPageActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).create().show();
+    }
+
     public void switchContent(Fragment fragment, String title, boolean aAddtoBackstack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         String backStateName = ft.getClass().getName();
-        //ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right);
+        //ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
         ft.replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName());
         if (aAddtoBackstack)
             ft.addToBackStack(backStateName);
         ft.commit();
-        // setActionBarTitle(title);
     }
 
     @Override
@@ -112,7 +136,7 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 displayView(FRAGMENT_DEFAULT, "Settings", true);
                 break;
             case 6:
-                displayView(FRAGMENT_DEFAULT, "Logout", true);
+                displayView(FRAGMENT_LOGOUT, "Logout", true);
                 break;
             default:
                 displayView(FRAGMENT_HOME, "Home", true);
