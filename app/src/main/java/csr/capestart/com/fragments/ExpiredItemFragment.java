@@ -23,6 +23,7 @@ import csr.capestart.com.adapters.ExpiredItemAdapter;
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.models.Category;
 import csr.capestart.com.data.models.ExpiredItem;
+import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
@@ -45,6 +46,8 @@ public class ExpiredItemFragment extends BaseFragment {
     public static ExpiredItemFragment newInstance(String title) {
         ExpiredItemFragment expiredItemFragment = new ExpiredItemFragment();
         Bundle bundle = new Bundle();
+        bundle.putCharSequence(AppConstants.INTENT_PARAM_ONE, title);
+        expiredItemFragment.setArguments(bundle);
         return expiredItemFragment;
     }
 
@@ -77,17 +80,19 @@ public class ExpiredItemFragment extends BaseFragment {
                 .subscribe(new Observer<JSONArray>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        showProgressDialog();
                     }
 
                     @Override
                     public void onNext(JSONArray items) {
+                        dismissProgressDialog();
                         List<ExpiredItem> expiredItems = Parser.parseExpiredItem(items);
                         mExpiredItemAdapter.refresh(expiredItems);
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
                         AppLog.log(TAG, e.getMessage());
                     }
 

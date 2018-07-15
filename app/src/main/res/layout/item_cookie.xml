@@ -4,8 +4,8 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    cardview:cardCornerRadius="2dp"
-    cardview:cardElevation="3dp"
+    cardview:cardCornerRadius="4dp"
+    cardview:cardElevation="10dp"
     cardview:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/lbl_barcode"
-                android:src="@drawable/sample_cookie_pic" />
+                android:scaleType="fitXY"
+                android:src="@drawable/cookie_item_2" />
 
         </LinearLayout>
 

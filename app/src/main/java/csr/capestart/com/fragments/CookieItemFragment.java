@@ -23,6 +23,7 @@ import csr.capestart.com.adapters.CookieItemAdapter;
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.models.Category;
 import csr.capestart.com.data.models.CookieItem;
+import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
@@ -45,6 +46,8 @@ public class CookieItemFragment extends BaseFragment {
     public static CookieItemFragment newInstance(String title) {
         CookieItemFragment cookieItemFragment = new CookieItemFragment();
         Bundle bundle = new Bundle();
+        bundle.putCharSequence(AppConstants.INTENT_PARAM_ONE, title);
+        cookieItemFragment.setArguments(bundle);
         return cookieItemFragment;
     }
 
@@ -77,17 +80,19 @@ public class CookieItemFragment extends BaseFragment {
                 .subscribe(new Observer<JSONArray>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        showProgressDialog();
                     }
 
                     @Override
                     public void onNext(JSONArray items) {
+                        dismissProgressDialog();
                         List<CookieItem> cookieItems = Parser.parseCookieItem(items);
                         mCookieItemAdapter.refresh(cookieItems);
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
                         AppLog.log(TAG, e.getMessage());
                     }
 
