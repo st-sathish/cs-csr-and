@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -51,6 +53,7 @@ public class CategoryFragment extends BaseFragment {
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle bundle = new Bundle();
         bundle.putCharSequence(AppConstants.INTENT_PARAM_ONE, title);
+        categoryFragment.setArguments(bundle);
         return categoryFragment;
     }
 
@@ -83,17 +86,19 @@ public class CategoryFragment extends BaseFragment {
                 .subscribe(new Observer<JSONArray>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        showProgressDialog();
                     }
 
                     @Override
                     public void onNext(JSONArray categories) {
+                        dismissProgressDialog();
                         Parser.addParsedCategory(categories, mCategoryList);
                         mCategoryAdapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        dismissProgressDialog();
                         AppLog.log(TAG, e.getMessage());
                     }
 

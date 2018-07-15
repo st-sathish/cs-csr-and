@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -22,11 +21,12 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <!--<com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/my_image_view"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                fresco:placeholderImage="@drawable/sample_cookie_pic" />-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/hqdefault"
+                android:scaleType="centerCrop" />
 
         </LinearLayout>
         <LinearLayout
@@ -39,9 +39,7 @@
                 android:id="@+id/category_txt"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
