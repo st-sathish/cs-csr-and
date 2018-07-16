@@ -2,9 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:background="#80000000"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.2"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            cardview:cardCornerRadius="10dp"
+            cardview:cardElevation="10dp"
+            cardview:cardUseCompatPadding="true"
+            android:layout_height="100dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="@string/lbl_dashboard" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
     <LinearLayout
         android:gravity="center"
@@ -34,15 +62,16 @@
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
                     android:fontFamily="sans-serif"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:text="@string/lbl_tot_stock"/>
+                    android:text="@string/lbl_stock"/>
 
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:background="@drawable/circular_shape"
+                    android:elevation="10dp"
                     android:layout_height="150dp">
 
                     <TextView
@@ -73,14 +102,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
                     android:fontFamily="sans-serif"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:text="@string/lbl_tot_stock"/>
+                    android:text="@string/lbl_expired"/>
 
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:elevation="10dp"
                     android:background="@drawable/circular_shape"
                     android:layout_height="150dp">
 
@@ -131,13 +161,14 @@
                     android:textSize="24sp"
                     android:gravity="center"
                     android:fontFamily="sans-serif"
-                    android:textColor="@color/white"
-                    android:text="@string/lbl_tot_stock"/>
+                    android:textColor="@color/black"
+                    android:text="@string/lbl_sold"/>
 
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:elevation="10dp"
                     android:background="@drawable/circular_shape"
                     android:layout_height="150dp">
 
@@ -168,14 +199,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
                     android:fontFamily="sans-serif"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:text="@string/lbl_tot_stock"/>
+                    android:text="@string/lbl_profit" />
 
                 <LinearLayout
                     android:layout_width="150dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:elevation="10dp"
                     android:background="@drawable/circular_shape"
                     android:layout_height="150dp">
 

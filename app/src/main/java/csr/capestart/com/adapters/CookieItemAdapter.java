@@ -1,16 +1,19 @@
 package csr.capestart.com.adapters;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
 
 import csr.capestart.com.R;
+import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.models.CookieItem;
 
 public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.MyViewHolder> {
@@ -41,6 +44,8 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
         holder.expiredDate.setText(cookieItem.getExpiredDate());
         holder.category.setText(cookieItem.getCategory());
         holder.price.setText(cookieItem.getPrice());
+        Uri uri = Uri.parse(ApiEndpoints.IMAGE_BASE_PATH + "/cookie_item_2.jpg");
+        holder.imageView.setImageURI(uri);
     }
 
     @Override
@@ -55,6 +60,7 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
         private TextView price;
         private TextView category;
         private TextView expiredDate;
+        private ImageView imageView;
 
         public MyViewHolder(View view) {
             super(view);
@@ -63,6 +69,7 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
             price = view.findViewById(R.id.price);
             expiredDate = view.findViewById(R.id.expired_date);
             category = view.findViewById(R.id.category);
+            imageView = view.findViewById(R.id.cookie_img);
         }
     }
 }

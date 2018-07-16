@@ -26,6 +26,10 @@
     <string name="lbl_price">Price:</string>
     <string name="lbl_expired_date">Expired Date:</string>
     <string name="lbl_category">Category:</string>
-    <string name="lbl_tot_stock">Total Stock</string>
+    <string name="lbl_stock">Stocks</string>
+    <string name="lbl_expired">Expired</string>
+    <string name="lbl_sold">Sold</string>
+    <string name="lbl_profit">Profit</string>
+    <string name="lbl_dashboard">This Year 2018 Overview</string>
     <string name="lbl_stock_nu">250</string>
 </resources>

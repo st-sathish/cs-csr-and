@@ -53,7 +53,7 @@ public class MyNotificationManager {
         builder.setContentIntent(pendingIntent);
         builder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher));
         builder.setContentTitle("CSR Alert");
-        builder.setContentText("Your notification content here.");
+        builder.setContentText(message);
 
         NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(NOTIFICATION_SERVICE);
 
