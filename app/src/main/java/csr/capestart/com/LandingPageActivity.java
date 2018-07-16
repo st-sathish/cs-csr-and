@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
@@ -23,7 +24,7 @@ import csr.capestart.com.fragments.FragmentDrawer;
 import csr.capestart.com.fragments.HomeFragment;
 import csr.capestart.com.fragments.NotificationFragment;
 
-public class LandingPageActivity extends BaseAppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class LandingPageActivity extends BaseAppCompatActivity implements FragmentDrawer.FragmentDrawerListener, OnSuccessListener<InstanceIdResult> {
 
     private static final String TAG = "LandingPageActivity";
     public static final int FRAGMENT_DEFAULT = 1;
@@ -46,6 +47,12 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
+
+        // get firebase token
+        FirebaseInstanceId
+                .getInstance()
+                .getInstanceId()
+                .addOnSuccessListener(LandingPageActivity.this,  this);
 
         //load default
         displayView(FRAGMENT_HOME, "", false);
@@ -142,5 +149,12 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 displayView(FRAGMENT_HOME, "Home", true);
                 break;
         }
+    }
+
+    @Override
+    public void onSuccess(InstanceIdResult instanceIdResult) {
+        String updatedToken = instanceIdResult.getToken();
+        AppLog.log("Updated Token", updatedToken);
+        SessionStore.saveToken(getApplicationContext(), updatedToken);
     }
 }

@@ -39,9 +39,6 @@ dependencies {
     implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.rx2FastAndroidNetworking"
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.google.firebase:firebase-iid:16.2.0'
-    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
     // image sync loader, thanks FB
