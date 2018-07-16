@@ -42,7 +42,6 @@ public class MyNotificationManager {
                 .build();
 
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
         NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(ID_SMALL_NOTIFICATION, notification);
     }

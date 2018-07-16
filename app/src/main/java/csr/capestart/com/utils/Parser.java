@@ -31,7 +31,7 @@ public final class Parser {
             user.setLastName(u.getString("last_name"));
             user.setMobile(u.getString("mobile"));
             user.setuId(u.getString("u_id"));
-            user.setEmail(u.getString("email"));
+            user.setEmail(u.getString("username"));
         } catch (JSONException e) {
             AppLog.error(TAG, "Caught with exception "+e.getMessage());
         }

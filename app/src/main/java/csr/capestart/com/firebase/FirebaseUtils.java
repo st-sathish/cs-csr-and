@@ -26,6 +26,11 @@ public final class FirebaseUtils {
 
     }
 
+    public static void saveToken(Context context, String token) {
+        SessionStore.saveToken(context, token);
+        registerToken(context);
+    }
+
     public static void registerToken(Context context) {
         String token = SessionStore.getToken(context);
         if(StringUtils.isNotEmpty(token) && StringUtils.isNotEmpty(SessionStore.user.getEmail())) {
@@ -33,7 +38,7 @@ public final class FirebaseUtils {
             body.put("email", SessionStore.user.getEmail());
             body.put("device_token", token);
             Rx2AndroidNetworking
-                    .post(ApiEndpoints.POST_REGISTER_DEVICE_TOKEN_API)
+                    .post(ApiEndpoints.PUT_REGISTER_DEVICE_TOKEN_API)
                     .addHeaders("Content-Type","application/json")
                     .addApplicationJsonBody(body)
                     .build()

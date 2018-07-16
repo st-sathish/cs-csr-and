@@ -14,8 +14,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
+import csr.capestart.com.firebase.FirebaseUtils;
 import csr.capestart.com.fragments.CategoryFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
 import csr.capestart.com.fragments.CookieItemFragment;
@@ -152,9 +154,19 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Integer fragment = getIntent().getIntExtra(AppConstants.KEY_NOTIFICATION_FRAGMENT, 0);
+        if(fragment != 0) {
+            displayView(fragment, "", false);
+        }
+    }
+
+    @Override
     public void onSuccess(InstanceIdResult instanceIdResult) {
         String updatedToken = instanceIdResult.getToken();
         AppLog.log("Updated Token", updatedToken);
-        SessionStore.saveToken(getApplicationContext(), updatedToken);
+        // SessionStore.saveToken(getApplicationContext(), updatedToken);
+        FirebaseUtils.saveToken(getApplicationContext(), updatedToken);
     }
 }
