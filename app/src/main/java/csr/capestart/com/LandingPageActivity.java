@@ -156,7 +156,7 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Integer fragment = getIntent().getIntExtra(AppConstants.KEY_NOTIFICATION_FRAGMENT, 0);
+        Integer fragment = intent.getIntExtra(AppConstants.KEY_NOTIFICATION_FRAGMENT, 0);
         if(fragment != 0) {
             displayView(fragment, "", false);
         }

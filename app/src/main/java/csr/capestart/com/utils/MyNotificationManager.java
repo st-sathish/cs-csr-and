@@ -10,6 +10,8 @@ import android.support.v4.app.NotificationCompat;
 
 import csr.capestart.com.R;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 public class MyNotificationManager {
 
     private static final int ID_SMALL_NOTIFICATION = 235;
@@ -21,7 +23,7 @@ public class MyNotificationManager {
     }
 
     public void showNotification(String title, String message, Intent intent) {
-        PendingIntent resultPendingIntent =
+        /*PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         mCtx,
                         ID_SMALL_NOTIFICATION,
@@ -43,6 +45,19 @@ public class MyNotificationManager {
 
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(ID_SMALL_NOTIFICATION, notification);
+        notificationManager.notify(ID_SMALL_NOTIFICATION, notification);*/
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mCtx, "NOTIFY_CHANNEL_1");
+        builder.setSmallIcon(android.R.drawable.ic_dialog_alert);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, intent, 0);
+        builder.setContentIntent(pendingIntent);
+        builder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher));
+        builder.setContentTitle("CSR Alert");
+        builder.setContentText("Your notification content here.");
+
+        NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(NOTIFICATION_SERVICE);
+
+        // Will display the notification in the notification bar
+        notificationManager.notify(ID_SMALL_NOTIFICATION, builder.build());
     }
 }

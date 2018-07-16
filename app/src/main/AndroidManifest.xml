@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".LandingPageActivity" />
+        <activity android:name=".LandingPageActivity" android:launchMode="singleTop" />
 
         <service
             android:name=".firebase.FirebaseMessagingService"
