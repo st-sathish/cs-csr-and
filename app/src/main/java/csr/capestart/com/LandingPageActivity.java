@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -99,11 +100,12 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     }
 
     private void doLogout() {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this, R.style.AlertDialogTheme)
                 // Set Dialog Title
                 .setTitle("Alert")
                 // Set Dialog Message
                 .setMessage("Do you want to logout?")
+                .setCancelable(false)
                 // Positive button
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -113,7 +115,14 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                         startActivity(intent);
                         finish();
                     }
-                }).create().show();
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
     }
 
     public void switchContent(Fragment fragment, String title, boolean aAddtoBackstack) {
