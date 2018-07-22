@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,6 +39,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private NavItemDrawerAdapter adapter;
     private TextView tvName;
+    private View highlightedView;
 
     List<NavItem> mNavItems = new ArrayList<NavItem>();
 
@@ -77,6 +79,11 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
                 getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                if (highlightedView != null) {
+                    highlightedView.setSelected(false);
+                }
+                view.setSelected(true);
+                highlightedView = view;
                 drawerListener.onDrawerItemSelected(view, position);
                 mDrawerLayout.closeDrawer(containerView);
             }
