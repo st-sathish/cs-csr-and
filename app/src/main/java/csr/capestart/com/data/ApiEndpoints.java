@@ -21,4 +21,6 @@ public final class ApiEndpoints {
     public static final String GET_EXPIRED_ITEMS_API = API_BASE_PATH + "/items/get_expired_items.php";
 
     public static final String PUT_REGISTER_DEVICE_TOKEN_API = API_BASE_PATH + "/user/put_device_token.php";
+
+    public static final String GET_DASHBOARD_META_DATA = API_BASE_PATH + "/dashboard.php";
 }
