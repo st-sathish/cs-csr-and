@@ -23,4 +23,6 @@ public final class ApiEndpoints {
     public static final String PUT_REGISTER_DEVICE_TOKEN_API = API_BASE_PATH + "/user/put_device_token.php";
 
     public static final String GET_DASHBOARD_META_DATA = API_BASE_PATH + "/dashboard.php";
+
+    public static final String GET_NOTIFICATIONS = API_BASE_PATH + "/notifications.php";
 }
