@@ -24,5 +24,7 @@ public final class ApiEndpoints {
 
     public static final String GET_DASHBOARD_META_DATA = API_BASE_PATH + "/dashboard.php";
 
-    public static final String GET_NOTIFICATIONS = API_BASE_PATH + "/notifications.php";
+    public static final String GET_NOTIFICATION_ITEMS = API_BASE_PATH + "/notifications.php";
+
+    public static final String GET_EXPIRED_DATES_BY_GROUP_API = API_BASE_PATH + "/items/get_group_by_expired_dates.php";
 }

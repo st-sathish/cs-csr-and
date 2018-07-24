@@ -39,6 +39,7 @@ dependencies {
     implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.rx2FastAndroidNetworking"
 
     // firebase
+    // implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
     // image sync loader, thanks FB

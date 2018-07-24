@@ -44,8 +44,8 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
         holder.expiredDate.setText(cookieItem.getExpiredDate());
         holder.category.setText(cookieItem.getCategory());
         holder.price.setText(cookieItem.getPrice());
-        Uri uri = Uri.parse(ApiEndpoints.IMAGE_BASE_PATH + "/cookie_item_2.jpg");
-        holder.imageView.setImageURI(uri);
+//        Uri uri = Uri.parse(ApiEndpoints.IMAGE_BASE_PATH + "/cookie_item_2.jpg");
+//        holder.imageView.setImageURI(uri);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
             price = view.findViewById(R.id.price);
             expiredDate = view.findViewById(R.id.expired_date);
             category = view.findViewById(R.id.category);
-            imageView = view.findViewById(R.id.cookie_img);
+            //imageView = view.findViewById(R.id.cookie_img);
         }
     }
 }
