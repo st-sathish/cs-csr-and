@@ -29,6 +29,11 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
         notifyDataSetChanged();
     }
 
+    public void addAllAndRefresh(List<CookieItem> cookieItems) {
+        this.cookieItems.addAll(cookieItems);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -20,9 +20,10 @@ public class BaseFragment extends Fragment {
     public String mTitle = "My Title";
     protected boolean mIsVisible = false;
     protected View mParentView = null;
-    protected int page = 1;
+    protected int page = 0;
     protected boolean isInfiniteScroll = false;
     ProgressDialog progressDialog = null;
+    protected int limit = 10;
 
     public BaseFragment() {
         super();
@@ -30,6 +31,8 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        //reset
+        page = 0;
         if(null != getArguments()) {
             mTitle = getArguments().getString(AppConstants.INTENT_PARAM_ONE);
         }
