@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import csr.capestart.com.LandingPageActivity;
 import csr.capestart.com.LoginActivity;
 import csr.capestart.com.R;
 import csr.capestart.com.extras.AppConstants;
@@ -71,6 +72,13 @@ public class BaseFragment extends Fragment {
     protected void dismissProgressDialog() {
         if(progressDialog != null) {
             progressDialog.dismiss();
+        }
+    }
+
+    public void switchFragment(int fragment, String title, boolean addToBackStack) {
+        LandingPageActivity landingPageActivity = (LandingPageActivity) getActivity();
+        if(null != landingPageActivity) {
+            landingPageActivity.displayView(fragment, title, addToBackStack);
         }
     }
 }

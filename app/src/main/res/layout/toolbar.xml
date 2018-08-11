@@ -6,4 +6,17 @@
     app:theme="@style/ToolBarStyle"
     android:minHeight="?android:attr/actionBarSize"
     android:background="@color/primary_darker">
+
+    <ImageView
+        android:id="@+id/add_cookie"
+        android:layout_width="45dp"
+        android:padding="5dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:tint="@color/white"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_done_black_24dp" />
+
 </android.support.v7.widget.Toolbar>

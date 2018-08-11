@@ -1,7 +1,5 @@
 package csr.capestart.com.utils;
 
-import com.google.gson.JsonObject;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import csr.capestart.com.data.models.Category;
-import csr.capestart.com.data.models.CookieItem;
+import csr.capestart.com.data.models.Cookie;
 import csr.capestart.com.data.models.ExpiredItem;
 import csr.capestart.com.data.models.User;
 import csr.capestart.com.extras.AppLog;
@@ -55,24 +53,24 @@ public final class Parser {
         }
     }
 
-    public static List<CookieItem> parseCookieItem(JSONArray items) {
-        List<CookieItem> cookieItems = new ArrayList<CookieItem>();
+    public static List<Cookie> parseCookieItem(JSONArray items) {
+        List<Cookie> cookies = new ArrayList<Cookie>();
         try {
             for(int i =0;i < items.length();i++) {
                 JSONObject c = items.getJSONObject(i);
-                CookieItem cookieItem = new CookieItem();
-                cookieItem.setItemName(c.getString("item_name"));
-                cookieItem.setBarcode(c.getString("barcode"));
-                cookieItem.setExpiredDate(c.getString("expiry_date"));
-                cookieItem.setItemId(c.getString("i_id"));
-                cookieItem.setPrice(c.getString("price"));
-                cookieItem.setCategory("category");
-                cookieItems.add(cookieItem);
+                Cookie cookie = new Cookie();
+                cookie.setItemName(c.getString("item_name"));
+                cookie.setBarcode(c.getString("barcode"));
+                cookie.setExpiredDate(c.getString("expiry_date"));
+                cookie.setItemId(c.getString("i_id"));
+                cookie.setPurchasePrice(c.getString("purchase_price"));
+                cookie.setCategory("category");
+                cookies.add(cookie);
             }
         } catch (JSONException e) {
             AppLog.error(TAG, e.getMessage());
         }
-        return cookieItems;
+        return cookies;
     }
 
     public static List<ExpiredItem> parseExpiredItem(JSONArray items) {
@@ -84,7 +82,7 @@ public final class Parser {
                 expiredItem.setItemName(c.getString("item_name"));
                 expiredItem.setBarcode(c.getString("barcode"));
                 expiredItem.setItemId(c.getString("i_id"));
-                expiredItem.setPrice(c.getString("price"));
+                expiredItem.setPurchasePrice(c.getString("purchase_price"));
                 expiredItem.setCategory("category");
                 expiredItems.add(expiredItem);
             }

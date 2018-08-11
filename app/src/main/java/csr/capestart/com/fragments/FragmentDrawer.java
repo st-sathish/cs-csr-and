@@ -55,7 +55,9 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         mNavItems.add(new NavItem("Home", R.drawable.icons8_home));
         mNavItems.add(new NavItem("Categories", R.drawable.icons8_categorize));
-        mNavItems.add(new NavItem("Cookie Items", R.drawable.icons8_cookies));
+        mNavItems.add(new NavItem("Stocks", R.drawable.icons8_cookies));
+        mNavItems.add(new NavItem("Debtors", R.drawable.icons8_cookies));
+        mNavItems.add(new NavItem("Sold Items", R.drawable.icons8_cookies));
         mNavItems.add(new NavItem("Expired Items", R.drawable.icons8_cookies));
         mNavItems.add(new NavItem("Notifications", R.drawable.icons8_notification));
         mNavItems.add(new NavItem("Settings", R.drawable.icons8_settings));

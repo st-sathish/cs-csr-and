@@ -23,7 +23,7 @@
     <!-- Items label -->
     <string name="lbl_item_name">Item Name:</string>
     <string name="lbl_barcode">Bar Code:</string>
-    <string name="lbl_price">Price:</string>
+    <string name="lbl_purchase_price">Purchase Price:</string>
     <string name="lbl_expired_date">Expired Date:</string>
     <string name="lbl_category">Category:</string>
     <string name="lbl_stock">Stocks</string>
@@ -32,4 +32,5 @@
     <string name="lbl_profit">Profit</string>
     <string name="lbl_dashboard">This Year 2018 Overview</string>
     <string name="lbl_stock_nu">250</string>
+    <string name="Rs">\u20B9</string>
 </resources>

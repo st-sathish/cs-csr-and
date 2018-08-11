@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,10 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import csr.capestart.com.LandingPageActivity;
 import csr.capestart.com.R;
-import csr.capestart.com.adapters.CookieItemAdapter;
+import csr.capestart.com.adapters.StockListAdapter;
 import csr.capestart.com.data.ApiEndpoints;
-import csr.capestart.com.data.models.CookieItem;
+import csr.capestart.com.data.models.Cookie;
 import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.utils.Parser;
@@ -32,26 +34,26 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class CookieItemFragment extends BaseFragment{
+public class StockListFragment extends BaseFragment implements View.OnClickListener {
 
-    private static final String TAG = "CookieItemFragment";
+    private static final String TAG = "StockListFragment";
 
     private RecyclerView recyclerView;
 
     private ProgressBar mProgressbar;
 
-    private CookieItemAdapter mCookieItemAdapter;
+    private StockListAdapter mStockListAdapter;
 
-    public CookieItemFragment() {
+    public StockListFragment() {
 
     }
 
-    public static CookieItemFragment newInstance(String title) {
-        CookieItemFragment cookieItemFragment = new CookieItemFragment();
+    public static StockListFragment newInstance(String title) {
+        StockListFragment stockListFragment = new StockListFragment();
         Bundle bundle = new Bundle();
         bundle.putCharSequence(AppConstants.INTENT_PARAM_ONE, title);
-        cookieItemFragment.setArguments(bundle);
-        return cookieItemFragment;
+        stockListFragment.setArguments(bundle);
+        return stockListFragment;
     }
 
     @Override
@@ -59,12 +61,14 @@ public class CookieItemFragment extends BaseFragment{
         mParentView = inflater.inflate(R.layout.fr_cookie_item, container, false);
         recyclerView = mParentView.findViewById(R.id.recycler_view);
         mProgressbar = mParentView.findViewById(R.id.progress_bar);
-        mCookieItemAdapter = new CookieItemAdapter();
+        mParentView.findViewById(R.id.add_cookie).setOnClickListener(this);
+        mStockListAdapter = new StockListAdapter(getContext());
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        //final GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mCookieItemAdapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.setAdapter(mStockListAdapter);
+        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -74,20 +78,20 @@ public class CookieItemFragment extends BaseFragment{
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
                     page += page;
-                    getCookieItems();
+                    getStocks();
                 }
             }
-        });
+        });*/
         return mParentView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getCookieItems();
+        getStocks();
     }
 
-    public void getCookieItems() {
+    public void getStocks() {
         Map<String, Integer> body = new HashMap<>();
         body.put("page", page);
         body.put("limit", limit);
@@ -109,8 +113,8 @@ public class CookieItemFragment extends BaseFragment{
                     public void onNext(JSONObject result) {
                         mProgressbar.setVisibility(View.INVISIBLE);
                         try {
-                            List<CookieItem> cookieItems = Parser.parseCookieItem(result.getJSONArray("data"));
-                            mCookieItemAdapter.addAllAndRefresh(cookieItems);
+                            List<Cookie> cookies = Parser.parseCookieItem(result.getJSONArray("data"));
+                            mStockListAdapter.addAllAndRefresh(cookies);
                         } catch(JSONException e) {
                             AppLog.error(TAG, e.getMessage());
                         }
@@ -127,5 +131,10 @@ public class CookieItemFragment extends BaseFragment{
 
                     }
                 });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switchFragment(LandingPageActivity.FRAGMENT_ADD_COOKIE, "Add Cookie", true);
     }
 }

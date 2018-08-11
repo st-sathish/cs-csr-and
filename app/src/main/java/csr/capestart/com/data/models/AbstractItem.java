@@ -6,7 +6,25 @@ public abstract class AbstractItem {
 
     private String itemName;
 
-    private String price;
+    private String purchasePrice;
+
+    public String getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(String purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    private String originalPrice;
 
     private String category;
 
@@ -26,14 +44,6 @@ public abstract class AbstractItem {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getCategory() {

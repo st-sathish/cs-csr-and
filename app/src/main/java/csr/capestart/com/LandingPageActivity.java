@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -19,13 +18,12 @@ import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
 import csr.capestart.com.firebase.FirebaseUtils;
+import csr.capestart.com.fragments.AddCookieFragment;
 import csr.capestart.com.fragments.CategoryFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
-import csr.capestart.com.fragments.CookieItemFragment;
-import csr.capestart.com.fragments.ExpiredItemFragment;
+import csr.capestart.com.fragments.StockListFragment;
 import csr.capestart.com.fragments.FragmentDrawer;
 import csr.capestart.com.fragments.HomeFragment;
-import csr.capestart.com.fragments.NotificationFragment;
 
 public class LandingPageActivity extends BaseAppCompatActivity implements FragmentDrawer.FragmentDrawerListener, OnSuccessListener<InstanceIdResult> {
 
@@ -33,11 +31,12 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     public static final int FRAGMENT_DEFAULT = 1;
     public static final int FRAGMENT_HOME = 2;
     public static final int FRAGMENT_CATEGORY = 3;
-    public static final int FRAGMENT_COOKIE_ITEM = 4;
+    public static final int FRAGMENT_STOCKS = 4;
     public static final int FRAGMENT_EXPIRED_ITEM = 5;
     public static final int FRAGMENT_NOTIFICATION = 6;
     public static final int FRAGMENT_SETTINGS = 7;
     public static final int FRAGMENT_LOGOUT = 8;
+    public static final int FRAGMENT_ADD_COOKIE = 9;
 
     private FragmentDrawer drawerFragment;
 
@@ -73,17 +72,23 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 title = "Categories";
                 fragment = CategoryFragment.newInstance(title);
                 break;
-            case FRAGMENT_COOKIE_ITEM:
-                title = "Cookie Items";
-                fragment = CookieItemFragment.newInstance(title);
+            case FRAGMENT_STOCKS:
+                title = "Stocks";
+                fragment = StockListFragment.newInstance(title);
                 break;
             case FRAGMENT_EXPIRED_ITEM:
                 title = "Expired Items";
-                fragment = ExpiredItemFragment.newInstance(title);
+                //fragment = ExpiredItemFragment.newInstance(title);
+                fragment = ComingSoonFragment.newInstance(title);
                 break;
             case FRAGMENT_NOTIFICATION:
                 title = "Notifications";
-                fragment = NotificationFragment.newInstance(title);
+                //fragment = NotificationFragment.newInstance(title);
+                fragment = ComingSoonFragment.newInstance(title);
+                break;
+            case FRAGMENT_ADD_COOKIE:
+                title = "Add Cookie";
+                fragment = AddCookieFragment.newInstance(title);
                 break;
             case FRAGMENT_LOGOUT:
                 doLogout();
@@ -142,18 +147,24 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 displayView(FRAGMENT_CATEGORY, "Category", true);
                 break;
             case 2:
-                displayView(FRAGMENT_COOKIE_ITEM, "Cookie Items", true);
+                displayView(FRAGMENT_STOCKS, "Stocks", true);
                 break;
             case 3:
-                displayView(FRAGMENT_EXPIRED_ITEM, "Expired item", true);
+                displayView(FRAGMENT_DEFAULT, "Debtors", true);
                 break;
             case 4:
-                displayView(FRAGMENT_NOTIFICATION, "Notifications", true);
+                displayView(FRAGMENT_DEFAULT, "Sold Items", true);
                 break;
             case 5:
-                displayView(FRAGMENT_DEFAULT, "Settings", true);
+                displayView(FRAGMENT_EXPIRED_ITEM, "Expired item", true);
                 break;
             case 6:
+                displayView(FRAGMENT_NOTIFICATION, "Notifications", true);
+                break;
+            case 7:
+                displayView(FRAGMENT_DEFAULT, "Settings", true);
+                break;
+            case 8:
                 displayView(FRAGMENT_LOGOUT, "Logout", true);
                 break;
             default:

@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -35,9 +37,9 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_login);
         uEditText = findViewById(R.id.input_email);
-        uEditText.setText("admin@gmail.com");
+        uEditText.setText("sathish.st@capestart.com");
         pEditText = findViewById(R.id.input_password);
-        pEditText.setText("admin");
+        pEditText.setText("admin123$");
         Button login = findViewById(R.id.btn_login);
         login.setOnClickListener(this);
     }
@@ -62,7 +64,7 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
     public void doLogin() {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating");
+        //progressDialog.setMessage("Authenticating");
         progressDialog.show();
 
         Map<String, String> body = new HashMap<>();
@@ -85,9 +87,17 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
                     @Override
                     public void onNext(JSONObject user) {
                         AppLog.log(TAG, user.toString());
-                        SessionStore.user = Parser.parseUser(user);
                         progressDialog.dismiss();
-                        openLandingPageActivity();
+                        try {
+                            if(!user.getBoolean("valid")) {
+                                Toast.makeText(getApplicationContext(), user.getString("message"), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            SessionStore.user = Parser.parseUser(user);
+                            openLandingPageActivity();
+                        } catch (JSONException e) {
+                            AppLog.log(TAG, e.getMessage());
+                        }
                     }
 
                     @Override

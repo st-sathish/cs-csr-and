@@ -39,7 +39,7 @@ public class ExpiredItemAdapter extends RecyclerView.Adapter<ExpiredItemAdapter.
         holder.itemName.setText(expiredItem.getItemName());
         holder.barcode.setText(expiredItem.getBarcode());
         holder.category.setText(expiredItem.getCategory());
-        holder.price.setText(expiredItem.getPrice());
+        holder.price.setText(expiredItem.getPurchasePrice());
     }
 
     @Override

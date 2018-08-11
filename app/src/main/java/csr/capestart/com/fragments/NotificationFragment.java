@@ -17,10 +17,9 @@ import org.json.JSONArray;
 import java.util.List;
 
 import csr.capestart.com.R;
-import csr.capestart.com.adapters.CookieItemAdapter;
-import csr.capestart.com.adapters.ExpiredItemAdapter;
+import csr.capestart.com.adapters.StockListAdapter;
 import csr.capestart.com.data.ApiEndpoints;
-import csr.capestart.com.data.models.CookieItem;
+import csr.capestart.com.data.models.Cookie;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
@@ -36,7 +35,7 @@ public class NotificationFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
 
-    private CookieItemAdapter mCookieItemAdapter;
+    private StockListAdapter mStockListAdapter;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -56,11 +55,11 @@ public class NotificationFragment extends BaseFragment {
         mParentView = inflater.inflate(R.layout.fr_notification, container, false);
         recyclerView = mParentView.findViewById(R.id.recycler_view);
         recyclerView = mParentView.findViewById(R.id.recycler_view);
-        mCookieItemAdapter = new CookieItemAdapter();
+        mStockListAdapter = new StockListAdapter(getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mCookieItemAdapter);
+        recyclerView.setAdapter(mStockListAdapter);
         return mParentView;
     }
 
@@ -87,8 +86,8 @@ public class NotificationFragment extends BaseFragment {
                     @Override
                     public void onNext(JSONArray items) {
                         dismissProgressDialog();
-                        List<CookieItem> cookieItems = Parser.parseCookieItem(items);
-                        mCookieItemAdapter.refresh(cookieItems);
+                        List<Cookie> cookies = Parser.parseCookieItem(items);
+                        mStockListAdapter.refresh(cookies);
                     }
 
                     @Override

@@ -1,6 +1,6 @@
 package csr.capestart.com.data.models;
 
-public class CookieItem extends AbstractItem {
+public class Cookie extends AbstractItem {
 
     private String expiredDate;
 

@@ -1,6 +1,6 @@
 package csr.capestart.com.adapters;
 
-import android.net.Uri;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,28 +9,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import csr.capestart.com.R;
-import csr.capestart.com.data.ApiEndpoints;
-import csr.capestart.com.data.models.CookieItem;
+import csr.capestart.com.data.models.Cookie;
 
-public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.MyViewHolder> {
+public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.MyViewHolder> {
 
-    private List<CookieItem> cookieItems = Collections.emptyList();
+    private List<Cookie> cookies = new ArrayList<>();
 
-    public CookieItemAdapter() {
+    private Context context;
 
+    public StockListAdapter(Context context) {
+        this.context = context;
     }
 
-    public void refresh(List<CookieItem> cookieItems) {
-        this.cookieItems = cookieItems;
+    public void refresh(List<Cookie> cookies) {
+        this.cookies = cookies;
         notifyDataSetChanged();
     }
 
-    public void addAllAndRefresh(List<CookieItem> cookieItems) {
-        this.cookieItems.addAll(cookieItems);
+    public void addAllAndRefresh(List<Cookie> cookies) {
+        this.cookies.addAll(cookies);
         notifyDataSetChanged();
     }
 
@@ -43,19 +45,20 @@ public class CookieItemAdapter extends RecyclerView.Adapter<CookieItemAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        CookieItem cookieItem = cookieItems.get(position);
-        holder.itemName.setText(cookieItem.getItemName());
-        holder.barcode.setText(cookieItem.getBarcode());
-        holder.expiredDate.setText(cookieItem.getExpiredDate());
-        holder.category.setText(cookieItem.getCategory());
-        holder.price.setText(cookieItem.getPrice());
+        Cookie cookie = cookies.get(position);
+        holder.itemName.setText(cookie.getItemName());
+        holder.barcode.setText(cookie.getBarcode());
+        holder.expiredDate.setText(cookie.getExpiredDate());
+        holder.category.setText(cookie.getCategory());
+        String pPrice = this.context.getString(R.string.Rs)+" "+cookie.getPurchasePrice();
+        holder.price.setText(pPrice);
 //        Uri uri = Uri.parse(ApiEndpoints.IMAGE_BASE_PATH + "/cookie_item_2.jpg");
 //        holder.imageView.setImageURI(uri);
     }
 
     @Override
     public int getItemCount() {
-        return cookieItems.size();
+        return cookies.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

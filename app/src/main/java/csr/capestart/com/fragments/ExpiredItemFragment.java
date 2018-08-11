@@ -13,18 +13,12 @@ import android.view.ViewGroup;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import csr.capestart.com.R;
-import csr.capestart.com.adapters.CategoryAdapter;
 import csr.capestart.com.adapters.ExpiredItemAdapter;
 import csr.capestart.com.data.ApiEndpoints;
-import csr.capestart.com.data.models.Category;
-import csr.capestart.com.data.models.CookieItem;
 import csr.capestart.com.data.models.ExpiredItem;
 import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
