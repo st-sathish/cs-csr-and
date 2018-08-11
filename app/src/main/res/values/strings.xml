@@ -33,4 +33,13 @@
     <string name="lbl_dashboard">This Year 2018 Overview</string>
     <string name="lbl_stock_nu">250</string>
     <string name="Rs">\u20B9</string>
+    <string name="btn_save">Save</string>
+
+    <string name="hint_item_name">Item Name</string>
+    <string name="hint_cookie_name">Cookie Name</string>
+    <string name="hint_barcode">Barcode</string>
+    <string name="hint_expiry_date">Expiry Date</string>
+    <string name="hint_purchase_price">Purchase Price</string>
+    <string name="hint_original_price">Original Price</string>
+    <string name="lbl_cookie">Cookie</string>
 </resources>
