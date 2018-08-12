@@ -27,4 +27,6 @@ public final class ApiEndpoints {
     public static final String GET_NOTIFICATION_ITEMS = API_BASE_PATH + "/notifications.php";
 
     public static final String GET_EXPIRED_DATES_BY_GROUP_API = API_BASE_PATH + "/items/get_group_by_expired_dates.php";
+
+    public static final String POST_SAVE_COOKIE = API_BASE_PATH +"/items/add_item.php";
 }

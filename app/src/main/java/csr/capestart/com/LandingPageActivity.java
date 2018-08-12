@@ -150,21 +150,24 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 displayView(FRAGMENT_STOCKS, "Stocks", true);
                 break;
             case 3:
-                displayView(FRAGMENT_DEFAULT, "Debtors", true);
+                displayView(FRAGMENT_ADD_COOKIE, "Add Cookie", true);
                 break;
             case 4:
-                displayView(FRAGMENT_DEFAULT, "Sold Items", true);
+                displayView(FRAGMENT_DEFAULT, "Debtors", true);
                 break;
             case 5:
-                displayView(FRAGMENT_EXPIRED_ITEM, "Expired item", true);
+                displayView(FRAGMENT_DEFAULT, "Sold Items", true);
                 break;
             case 6:
-                displayView(FRAGMENT_NOTIFICATION, "Notifications", true);
+                displayView(FRAGMENT_EXPIRED_ITEM, "Expired item", true);
                 break;
             case 7:
-                displayView(FRAGMENT_DEFAULT, "Settings", true);
+                displayView(FRAGMENT_NOTIFICATION, "Notifications", true);
                 break;
             case 8:
+                displayView(FRAGMENT_DEFAULT, "Settings", true);
+                break;
+            case 9:
                 displayView(FRAGMENT_LOGOUT, "Logout", true);
                 break;
             default:

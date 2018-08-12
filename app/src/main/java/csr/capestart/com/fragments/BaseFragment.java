@@ -23,7 +23,6 @@ public class BaseFragment extends Fragment {
     protected View mParentView = null;
     protected int page = 0;
     protected boolean isInfiniteScroll = false;
-    ProgressDialog progressDialog = null;
     protected int limit = 10;
 
     public BaseFragment() {
@@ -64,14 +63,16 @@ public class BaseFragment extends Fragment {
     }
 
     protected void showProgressDialog() {
-        progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
+        LandingPageActivity landingPageActivity = (LandingPageActivity) getActivity();
+        if(null != landingPageActivity) {
+            landingPageActivity.showDialog();
+        }
     }
 
     protected void dismissProgressDialog() {
-        if(progressDialog != null) {
-            progressDialog.dismiss();
+        LandingPageActivity landingPageActivity = (LandingPageActivity) getActivity();
+        if(null != landingPageActivity) {
+            landingPageActivity.hideDialog();
         }
     }
 
