@@ -43,4 +43,5 @@
     <string name="hint_selling_price">Selling Price</string>
     <string name="lbl_cookie">Cookie</string>
     <string name="lbl_select_category">Select a Category</string>
+    <string name="hint_category_name">Category Name</string>
 </resources>

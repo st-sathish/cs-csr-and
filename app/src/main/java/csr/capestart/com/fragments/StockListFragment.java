@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -58,7 +58,7 @@ public class StockListFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mParentView = inflater.inflate(R.layout.fr_cookie_item, container, false);
+        mParentView = inflater.inflate(R.layout.fr_stock_list, container, false);
         recyclerView = mParentView.findViewById(R.id.recycler_view);
         mProgressbar = mParentView.findViewById(R.id.progress_bar);
         mParentView.findViewById(R.id.add_cookie).setOnClickListener(this);
@@ -113,6 +113,10 @@ public class StockListFragment extends BaseFragment implements View.OnClickListe
                     public void onNext(JSONObject result) {
                         mProgressbar.setVisibility(View.INVISIBLE);
                         try {
+                            if(result.getInt("total_record") == 0) {
+                                Toast.makeText(getContext(), "No Record Found", Toast.LENGTH_LONG).show();
+                                return;
+                            }
                             List<Cookie> cookies = Parser.parseCookieItem(result.getJSONArray("data"));
                             mStockListAdapter.addAllAndRefresh(cookies);
                         } catch(JSONException e) {

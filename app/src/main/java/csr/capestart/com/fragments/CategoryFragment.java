@@ -1,49 +1,36 @@
 package csr.capestart.com.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import csr.capestart.com.LandingPageActivity;
 import csr.capestart.com.R;
-import csr.capestart.com.adapters.CategoryAdapter;
 import csr.capestart.com.data.ApiEndpoints;
-import csr.capestart.com.data.models.Category;
 import csr.capestart.com.extras.AppConstants;
-import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
-import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class CategoryFragment extends BaseFragment {
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
-    private static final String TAG = "CategoryFragment";
+public class CategoryFragment extends BaseFragment implements View.OnClickListener {
 
-    private RecyclerView recyclerView;
-
-    private List<Category> mCategoryList = new ArrayList<Category>();
-
-    private CategoryAdapter mCategoryAdapter;
+    private EditText mCategoryName;
 
     public CategoryFragment() {
 
@@ -58,48 +45,71 @@ public class CategoryFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         mParentView = inflater.inflate(R.layout.fr_category, container, false);
-        recyclerView = mParentView.findViewById(R.id.recycler_view);
-        mCategoryAdapter = new CategoryAdapter(mCategoryList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mCategoryAdapter);
+        mCategoryName = mParentView.findViewById(R.id.input_category_name);
+        mParentView.findViewById(R.id.btn_save).setOnClickListener(this);
         return mParentView;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getCategories();
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btn_save:
+                if(null != getActivity()) {
+                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    if(imm != null && getActivity().getCurrentFocus() !=null) {
+                        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                    }
+                }
+                saveCategory();
+                break;
+            default:
+                break;
+        }
     }
 
-    public void getCategories() {
-        Rx2AndroidNetworking
-                .post(ApiEndpoints.GET_CATEGORIES_API)
-                .addHeaders("Content-Type","application/json")
+    public void saveCategory() {
+        String itemName = mCategoryName.getText().toString();
+        if(itemName.equals("")) {
+            mCategoryName.setError("Please fill category name");
+            return;
+        }
+        Map<String, String> payload = new HashMap<>();
+        payload.put("category_name", itemName);
+        payload.put("username", SessionStore.user.getEmail());
+        Rx2AndroidNetworking.post(ApiEndpoints.POST_SAVE_CATEGORY)
+                .addHeaders("Content-Type", "application/json")
+                .addApplicationJsonBody(payload)
                 .build()
-                .getJSONArrayObservable()
+                .getJSONObjectObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<JSONArray>() {
+                .subscribe(new Observer<JSONObject>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         showProgressDialog();
                     }
 
                     @Override
-                    public void onNext(JSONArray categories) {
+                    public void onNext(JSONObject jsonObject) {
                         dismissProgressDialog();
-                        Parser.addParsedCategory(categories, mCategoryList);
-                        mCategoryAdapter.notifyDataSetChanged();
+                        try {
+                            if(jsonObject.getInt("success") == 1) {
+                                String msg = jsonObject.getString("message");
+                                Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                                switchFragment(LandingPageActivity.FRAGMENT_LIST_CATEGORY, null, false);
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(getContext(), "Failed while saving category", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        System.out.println(e.getMessage());
                         dismissProgressDialog();
-                        AppLog.log(TAG, e.getMessage());
                     }
 
                     @Override

@@ -20,6 +20,7 @@ import csr.capestart.com.extras.SessionStore;
 import csr.capestart.com.firebase.FirebaseUtils;
 import csr.capestart.com.fragments.AddCookieFragment;
 import csr.capestart.com.fragments.CategoryFragment;
+import csr.capestart.com.fragments.CategoryListFragment;
 import csr.capestart.com.fragments.ComingSoonFragment;
 import csr.capestart.com.fragments.StockListFragment;
 import csr.capestart.com.fragments.FragmentDrawer;
@@ -30,13 +31,14 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     private static final String TAG = "LandingPageActivity";
     public static final int FRAGMENT_DEFAULT = 1;
     public static final int FRAGMENT_HOME = 2;
-    public static final int FRAGMENT_CATEGORY = 3;
+    public static final int FRAGMENT_LIST_CATEGORY = 3;
     public static final int FRAGMENT_STOCKS = 4;
     public static final int FRAGMENT_EXPIRED_ITEM = 5;
     public static final int FRAGMENT_NOTIFICATION = 6;
     public static final int FRAGMENT_SETTINGS = 7;
     public static final int FRAGMENT_LOGOUT = 8;
     public static final int FRAGMENT_ADD_COOKIE = 9;
+    public static final int FRAGMENT_CATEGORY = 10;
 
     private FragmentDrawer drawerFragment;
 
@@ -68,8 +70,12 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
                 title = "Home";
                 fragment = HomeFragment.newInstance(title);
                 break;
-            case FRAGMENT_CATEGORY:
+            case FRAGMENT_LIST_CATEGORY:
                 title = "Categories";
+                fragment = CategoryListFragment.newInstance(title);
+                break;
+            case FRAGMENT_CATEGORY:
+                title = "Add Category";
                 fragment = CategoryFragment.newInstance(title);
                 break;
             case FRAGMENT_STOCKS:
@@ -144,7 +150,7 @@ public class LandingPageActivity extends BaseAppCompatActivity implements Fragme
     public void onDrawerItemSelected(View view, int position) {
         switch(position) {
             case 1:
-                displayView(FRAGMENT_CATEGORY, "Category", true);
+                displayView(FRAGMENT_LIST_CATEGORY, "Category", true);
                 break;
             case 2:
                 displayView(FRAGMENT_STOCKS, "Stocks", true);
