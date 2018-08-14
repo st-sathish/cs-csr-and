@@ -38,9 +38,7 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_login);
         uEditText = findViewById(R.id.input_email);
-        uEditText.setText("abey.george@capestart.com");
         pEditText = findViewById(R.id.input_password);
-        pEditText.setText("admin123$");
         Button login = findViewById(R.id.btn_login);
         login.setOnClickListener(this);
     }
