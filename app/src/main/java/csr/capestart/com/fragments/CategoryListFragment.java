@@ -25,6 +25,7 @@ import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.models.Category;
 import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
+import csr.capestart.com.utils.NetworkConnectionUtils;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -74,6 +75,10 @@ public class CategoryListFragment extends BaseFragment implements View.OnClickLi
     }
 
     public void getCategories() {
+        if(!NetworkConnectionUtils.isInternetOn(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         Rx2AndroidNetworking
                 .post(ApiEndpoints.GET_CATEGORIES_API)
                 .addHeaders("Content-Type","application/json")

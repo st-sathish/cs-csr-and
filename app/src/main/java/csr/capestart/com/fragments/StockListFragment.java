@@ -28,6 +28,7 @@ import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.models.Cookie;
 import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.AppLog;
+import csr.capestart.com.utils.NetworkConnectionUtils;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -92,6 +93,10 @@ public class StockListFragment extends BaseFragment implements View.OnClickListe
     }
 
     public void getStocks() {
+        if(!NetworkConnectionUtils.isInternetOn(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         Map<String, Integer> body = new HashMap<>();
         body.put("page", page);
         body.put("limit", limit);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -18,6 +19,7 @@ import csr.capestart.com.R;
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
+import csr.capestart.com.utils.NetworkConnectionUtils;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,6 +62,10 @@ public class HomeFragment extends BaseFragment {
     }
 
     public void getDashboardMetaData() {
+        if(!NetworkConnectionUtils.isInternetOn(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.show();

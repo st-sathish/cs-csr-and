@@ -19,6 +19,7 @@ import java.util.Map;
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.extras.AppLog;
 import csr.capestart.com.extras.SessionStore;
+import csr.capestart.com.utils.NetworkConnectionUtils;
 import csr.capestart.com.utils.Parser;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -62,6 +63,10 @@ public class LoginActivity extends BaseAppCompatActivity implements View.OnClick
 
 
     public void doLogin() {
+        if(!NetworkConnectionUtils.isInternetOn(getBaseContext())) {
+            Toast.makeText(getBaseContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         //progressDialog.setMessage("Authenticating");

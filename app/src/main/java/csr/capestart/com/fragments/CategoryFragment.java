@@ -21,6 +21,7 @@ import csr.capestart.com.R;
 import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.extras.AppConstants;
 import csr.capestart.com.extras.SessionStore;
+import csr.capestart.com.utils.NetworkConnectionUtils;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -71,6 +72,10 @@ public class CategoryFragment extends BaseFragment implements View.OnClickListen
     }
 
     public void saveCategory() {
+        if(!NetworkConnectionUtils.isInternetOn(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         String itemName = mCategoryName.getText().toString();
         if(itemName.equals("")) {
             mCategoryName.setError("Please fill category name");

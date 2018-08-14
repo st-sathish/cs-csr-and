@@ -21,6 +21,7 @@ import csr.capestart.com.data.ApiEndpoints;
 import csr.capestart.com.data.domain.Category;
 import csr.capestart.com.data.models.CookieRequest;
 import csr.capestart.com.extras.AppConstants;
+import csr.capestart.com.utils.NetworkConnectionUtils;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -85,6 +86,10 @@ public class AddCookieFragment extends BaseFragment implements View.OnClickListe
     }
 
     public void getCategories() {
+        if(!NetworkConnectionUtils.isInternetOn(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         Rx2AndroidNetworking.get(ApiEndpoints.GET_CATEGORIES_API)
                 .addHeaders("Content-Type", "application/json")
                 .build()
@@ -117,6 +122,10 @@ public class AddCookieFragment extends BaseFragment implements View.OnClickListe
     }
 
     public void saveCookie() {
+        if(!NetworkConnectionUtils.isInternetOn(getContext())) {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            return;
+        }
         String itemName = etCookieName.getText().toString();
         if(itemName.equals("")) {
             etCookieName.setError("Please fill cookie name");
